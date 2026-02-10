@@ -37,7 +37,7 @@ team_aces |> mutate(percentile = ntile(total_aces, 100))
 
 Write a couple of sentences that puts Maryland into context with the other teams in the dataset. You can do some Internet research to help with this.
 
-
+Most of the other teams at the top of service aces, along with Maryland, were not very good. The data shows that the quantity of service aces does not have a huge influence on winning and losing. Also, many of the teams that ranked highly played in non power conferences. For teams that do have a player that is very good in those conferences, it is likely that opponents are not as good at stopping it at mid-major teams than power conference teams. 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
 
