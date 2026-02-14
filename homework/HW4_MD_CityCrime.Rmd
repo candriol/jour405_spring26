@@ -62,3 +62,16 @@ The data from all Maryland cities show many violent crime rate percentages hover
 ### Task 9: Save Your Work and Put it on GitHub
 
 Save this notebook, then commit it to your local repository. Push the changes to your GitHub repository and submit the URL for this file in ELMS.
+
+### Task 10: Find percentiles
+
+```{r}
+md_cities_percentiles <- md_cities_rates |> mutate(violent_2020_percentile = ntile(violent_rate_2020, 100))
+```
+11 cities are above the 90th percentile in violent crame rate. 
+
+### Task 11: Calculate Interquartile Range
+```{r}
+md_cities_rates |> summarise(violent_2020_IQR = IQR (violent_rate_2020))                
+```
+The results of the IQR do not change the best story idea because the IQR number shows that most cities have violent crime rates that are within 4.230501 violent crimes per 1,000 people. The small IQR emphasizes the point that violent crime changed very minimally. 
