@@ -46,6 +46,6 @@ car_thefts |>
 
 Is the distribution normal or skewed in one direction? Write a sentence in which you describe the range of the data covered by one standard deviation from the mean on both sides - how much of the data falls in that range?
 
-
+The 80% normal because the highest point of the histogram is very close to the mean and most of the data falls within the range of two standard deviations. But there also is more outliers in this distribution than a perfectly symmetrical distribution, especially on the low side.   
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
