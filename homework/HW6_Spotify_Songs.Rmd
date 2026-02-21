@@ -64,7 +64,7 @@ spotify_songs |>
 
 Write a few sentences about the distribution of danceability scores in the Spotify dataset. Is it a normal distribution, or is it skewed in one direction? What does the mean and one standard distribution tell us about the songs in the dataset? Draft a short story pitch from this data.
 
-More of the data is clustered to the right of the mean, therefore, the dataset shows danceability scores are slightly skewed left. The mean and standard deviation prove that songs on spotify have a stronger danceability on average because within one standard deviation left of the mean is songs with higher than a 0.5 score. With 0.5 meaning a song is in the middle between 100% danceable and not danceable at all, more than 75% of the data is above the 0.5 score. 
+More of the data is clustered to the right of the mean, therefore, the dataset shows danceability scores are slightly skewed left. The mean and standard deviation prove that songs on spotify have a stronger danceability on average because within one standard deviation left of the mean is songs with higher than a 0.5 score. With 0.5 meaning a song is in the middle between 100% danceable and not danceable at all, more than 75% of the data is above the 0.5 score with the peak number of songs reaching at a score of about .80. 
 
 ### Task 8: Save Your Work and Put it on GitHub
 
