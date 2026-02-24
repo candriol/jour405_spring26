@@ -74,7 +74,7 @@ summary(daily_calls$call_count)
 
 Let's visualize the time series of daily calls. What patterns do you see? If you had to draw horizontal lines that would highlight unusual days, where would those lines be?
 
-ANSWER HERE
+ANSWER HERE: The patterns I notice are that the numbers increased and began to peak higher in the srping time. It also looks like the low numbers were well farther away from the mean than the high numbers. The horizontal lines would be drawn probably be between 11 and 15 calls. This would highlight the day of high frequency and low freqancy of calls best. 
 
 ```{r daily-calls-plot}
 # Plot daily call volume
@@ -207,7 +207,7 @@ ggplot(dow_summary, aes(x = day_of_week, y = avg_calls)) +
 
 We can also calculate z-scores that account for the day of the week pattern. How would you describe the day with the highest z-score without using the term "z-score"?
 
-ANSWER HERE
+ANSWER HERE: On avereage, Saturday's are the most frequent day where the number of overdoes calls is higher than average. 
 
 ```{r day-of-week-z-scores}
 # Calculate day-of-week adjusted z-scores
@@ -298,5 +298,5 @@ top_outliers |> kable(digits = 2)
 
 Based on our z-score analysis, what are some potential angles for reporting? What would your next steps be and what would you tell an editor about your findings?
 
-ANSWER HERE
+ANSWER HERE: A potential angle is the figuring out what happened between July 14 and July 22. Those two days had the some of the highest number of overdose calls. Them happening within 8 days of each other could mean there was an event, or a bad batch of drugs that caused the problem. 
 
