@@ -271,3 +271,7 @@ When reporting on these findings, remember to:
 2. **Investigate Causes**: Follow up on unusual values to understand the underlying reasons
 3. **Consider Multiple Metrics**: Look at both raw numbers and population-adjusted figures
 4. **Account for Seasonality**: Consider whether values are unusual compared to the same time of year
+
+
+
+
