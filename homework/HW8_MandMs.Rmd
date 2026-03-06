@@ -6,26 +6,43 @@ In this assignment, you'll be picking up where you left off with the M&Ms activi
 
 ### Task 1: Load the tidyverse
 
+```{r}
+library(tidyverse)
+```
 
 ### Task 2: Load the M&Ms dataset from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv
 
+```{r}
+candy <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv")
+```
 
 ### Task 3: Sample 5 rows of data from the dataset
 
-
+```{r}
+sample_5 <- candy |> sample_n(5)
+```
 ### Task 4: Calculate the mean age and standard deviation of the sample, using either the blue or white number of M&Ms
 
+```{r}
+sample_5 |> summarize(mean = mean(black), sd = sd(black))
+```
 
 ### Task 5: Calculate the mean age and standard deviation of the population, using the same measure as in Task 4
-
+```{r}
+candy |> summarize(mean(black), sd = sd(black))
+```
 
 ### Task 6: Compare the sample and population statistics
 
 Compare the two sets of means and standard deviations. Are they similar?
 
+The two data sets are not very similar because there is a large enough difference in the data. The sample mean noticeably higher than the population mean with a difference of about 9 and if it was a perfectly representative sample of a population the numbers would be closer. The sample standard deviation is also higher than the population standard deviation with a pretty noticeable difference of about 8 making them not very similar. The sample probably needs to be larger. 
+
 ### Task 7: Describe the results
 
 Write a few sentences about what you found in the data. What does this tell you about the M&Ms dataset and about the act of random sampling?
+
+The data says that this sample of M&Ms is not representative to the overall population. The sample had higher values for both the mean and standard deviation. This proves that sampling error is common as it is hard to match a population exactly, especially with a small sample size. Smaller sample sizes are more influenced by outliers which causes the data, causing higher variability in turn making a sample less representative of a population. 
 
 
 When finished, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
