@@ -179,4 +179,4 @@ ANSWER HERE:
 
 Headline: Survey of college students shows students get recommended hours of sleep
 
-Lede: A recent survey of student at the University of Maryland showed that they are getting the recommended 7 hours of sleep by the CDC. Calculations find that students might actually be getting closer to 8 hours of sleep, with a mean of 7.73 hours of sleep. 
+Lede: A recent survey of student at the University of Maryland showed that they are getting the recommended 7 hours of sleep by the CDC. Calculations find that students might actually be getting closer to 8 hours of sleep, with a mean of 7.73 hours of sleep.
