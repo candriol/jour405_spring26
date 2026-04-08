@@ -10,6 +10,7 @@ library(kableExtra)
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(tidyverse)
 
+
 ```
 
 # Introduction
@@ -94,9 +95,15 @@ ggplot(nonvoters_data, aes(x = weight)) +
 
 1. What is the range of weights in this dataset?
 
+The range of weights is from 0.23-3.04.
+
 2. What does it mean when a respondent has a weight of 0.23? What about 3.04?
 
+0.23 means that type of person was more frequent in the poll, while the 3.04 weight means that type of person was ofund less frequently. 
+
 3. Why might some respondents be weighted more heavily than others?
+
+The communities they are apart of are more or less common compared to others who took the poll 
 
 # Exercise 1: Voter Categories and Weighting
 
@@ -233,6 +240,12 @@ kable(comparison, digits = 1, caption = "Difference Between Weighted and Unweigh
 
 1. Which voter category shows the biggest difference between weighted and unweighted results?
 
+The rarely/never category because they are the hardest to reach. 
+
 2. How might these differences affect reporting on likely voter turnout?
 
+Voter turnout is just the willingness of people to vote. People who choose not to vote won't and the numbers will skew differently without that group of people and are less likley to participate in the poll. 
+
 3. Why do you think these differences exist? What does this tell us about who might be over or under-represented in the sample?
+
+A person might be respond that they are unlikely to vote then change their mind at election time. Therefore, they are the most underrepresented group in polls because data shows that they are less likely to vote. 
