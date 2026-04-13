@@ -1,0 +1,25 @@
+---
+title: "Final Project: MBB Spending vs Wins"
+output: html_document
+---
+```{r setup}
+library(tidyverse)
+```
+## Load EADA Data
+```{r load-data}
+eada_raw <- read_csv("final_project.Rmd - Sheet1.csv")
+```
+
+The dataset comes from the U.S. Department of Education's Equity in Athletics Disclosure Act (EADA) database and contains the expenses of all NCAA Division I FCS/FBS men's and women's basketball programs from 2014-2023. 
+
+The columns most important for my analysis are the ones that state the expenses and total revenues of a given program.
+
+What's missing that I might want is the win-loss records of the programs, strength of schedule that they play, recruiting class rankings and facility spending. Having access to all of those numbers would give an even clearer representation about how much each program is spedning in all areas to improve their basketball team. 
+
+Questions I have: 
+
+Some schools may have missing data for certain years. Should those rows be dropped or filled using surrounding years?
+
+he 2020 survey year covers the COVID-affected season where the NCAA Tournament was cancelled. Should that year be excluded from the wins analysis entirely?
+
+Because the dataset is so large, should I focus on 5 years instead of ten? Would that still be a large enough sample size? 
