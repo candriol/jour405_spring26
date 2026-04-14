@@ -49,5 +49,20 @@ matches |>
 
 ### Task 6: Describe the results of both the correlation calculation and the scatterplot.
 
+The scatter plot shows that there is almost no relationship between the number of fouls a soccer team commits and the results of their game (win vs loss). The nearly perfect straight horizontal line shows that there is a near-zero relationship between the variables. 
+
+### Task 7: Choose another variable and repeat the steps in Tasks 4-5, then describe the result
+
+```{r}
+matches |> summarize(correlation = cor(corners, goal_diff, method="pearson"))
+
+matches |> 
+  ggplot() +
+  geom_point(aes(x=goal_diff, y=corners)) +
+  geom_smooth(aes(x=goal_diff, y=corners), method="lm")
+
+```
+
+Answer: There is a slightly positive correlation between the number of corner kicks a team gets in a game with their win-loss record. They appear to effect if a teams wins or losses, but are not a huge factor in deciding the outcome. The correlation line shows is going up much more than it did in the plot comparing fouls and team outcomes.  
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.

@@ -6,9 +6,7 @@ Remember how we talked about people killing each other more when it's hot outsid
 
 ### Task 1: Load the tidyverse
 
-```{r}
-library(tidyverse)
-```
+
 
 ### Task 2: Load the dataset from [https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/pg_murder_temps.csv](https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/pg_murder_temps.csv)
 
