@@ -13,6 +13,7 @@ Your task in this assignment will be to examine the relationship between those t
 ### Task 1: Load the tidyverse
 
 ```{r}
+library(tidyverse)
 ```
 
 ### Task 2: Load the GDP and DJIA data
@@ -20,6 +21,7 @@ Your task in this assignment will be to examine the relationship between those t
 Load the GDP data from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/gdp_djia.csv
 
 ```{r}
+GDP_DJIA_data <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/gdp_djia.csv")
 ```
 
 ### Task 3: Calculate the correlation coefficient
@@ -27,6 +29,7 @@ Load the GDP data from https://raw.githubusercontent.com/dwillis/jour405/refs/he
 Use the `cor()` function to calculate the correlation coefficient between the DJIA and GDP.
 
 ```{r}
+GDP_DJIA_data |> summarize(correlation = cor(GDP, DJIA, method = "pearson"))
 ```
 
 ### Task 4: Create a scatterplot
@@ -34,11 +37,22 @@ Use the `cor()` function to calculate the correlation coefficient between the DJ
 Use the `ggplot()` function to create a scatterplot of the DJIA and GDP. Be sure to label your axes and add a title.
 
 ```{r}
+GDP_DJIA_data |>
+ggplot() +
+geom_point(aes(x=DJIA, y=GDP)) + 
+geom_smooth(aes(x=DJIA, y=GDP), method = "lm") + 
+labs(
+  title = "Relationship between U.S. GDP and DJIA", 
+  x = "Dow Jones Industrial Average (DJIA)",
+  y = "Gross Domestic Product (GDP)"
+)
 ```
 
 ### Task 5: Describe our results
 
 Write a few sentences about the relationship between the DJIA and GDP. Is there a strong correlation between the two variables? What does the scatterplot show?
+
+There is a very strong positive correlation between the DJIA and GDP. The 0.95 correlation coefficient is near max strength and the scatterplot confirms this. Each dot is close to the line and create a positive slope up to the right, showing the correlation strength between the two variables. 
 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
