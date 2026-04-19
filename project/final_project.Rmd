@@ -2,6 +2,18 @@
 title: "Final Project: MBB Spending vs Wins"
 output: html_document
 ---
+Tests I could run:
+
+I think the most relevant test for my project would be a correlation test like the one's we've been doing recently. My hypothesis is a question of if two variables are correlated with each other so this makes the most sense. I think a Pearson correlation between the total expenses and wins for each year would give me the positive correlation that I'm expecting. I think also running separate tests like with operating and recruiting expenses can help see which variable has the biggest effect on winning. 
+
+Finding Z-scores would be useful for identifying outlier programs that spends either drastically more or less than the average program, or wins more or less than expected given their spending habits. Calculating z-scores for both expenses and wins while looking for extreme tails would be telling. 
+
+GGplot visualizations such as a scartterplot, histogram, line chart and bar chart would be nice visuals that supply useful information. Each visual would have its own topic. 
+
+Finding margin of error and confidence intervals are another test. Because I am making claims about the spending and wins being correlated, having the confidence about those statements would make sense. This is relevant in the subgroups and help me find if the difference in those is meaningful.
+
+The last one I can think of a t-test splitting schools into two groups and find the if the averages of something like win totals is significantly different. 
+
 ```{r setup}
 library(tidyverse)
 ```
@@ -20,6 +32,7 @@ Questions I have:
 
 Some schools may have missing data for certain years. Should those rows be dropped or filled using surrounding years?
 
-he 2020 survey year covers the COVID-affected season where the NCAA Tournament was cancelled. Should that year be excluded from the wins analysis entirely?
+The 2020 survey year covers the COVID-affected season where the NCAA Tournament was cancelled. Should that year be excluded from the wins analysis entirely?
 
 Because the dataset is so large, should I focus on 5 years instead of ten? Would that still be a large enough sample size? 
+
