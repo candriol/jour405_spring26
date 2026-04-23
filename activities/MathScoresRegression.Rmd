@@ -144,4 +144,3 @@ Write a short story pitch (3-5 sentences) that addresses the following: Does the
 
 The data contradicts the claim as the data shows a counter-intuitive positive relationship as the poverty levels and math scores have a different relationship what is claimed. The data doesn't have use enough variables to accurately support the board member's claim. The model would to use more data points that help determine if there is a positive correlation between the FARMS percentage and math scores. I would need more of that data to publish this. I would contact somebody to figure out why so many schools are at 100% for FARMS eligibility and if that number is true. 
 
-... the model does not have enough variables to explain the correlation...
