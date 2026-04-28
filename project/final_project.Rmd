@@ -20,6 +20,7 @@ library(tidyverse)
 ## Load EADA Data
 ```{r load-data}
 eada_raw <- read_csv("final_project.Rmd - Sheet1.csv")
+success <- read_csv("mbb_stats.csv")
 ```
 
 The dataset comes from the U.S. Department of Education's Equity in Athletics Disclosure Act (EADA) database and contains the expenses of all NCAA Division I FCS/FBS men's and women's basketball programs from 2014-2023. 
@@ -35,4 +36,28 @@ Some schools may have missing data for certain years. Should those rows be dropp
 The 2020 survey year covers the COVID-affected season where the NCAA Tournament was cancelled. Should that year be excluded from the wins analysis entirely?
 
 Because the dataset is so large, should I focus on 5 years instead of ten? Would that still be a large enough sample size? 
+
+### Correlation test
+```{r}
+eada_raw |>
+  ggplot(aes(x = `Expenses Men's Team`, y = OverallWins)) +
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(
+    x = "Total Basketball Expenses",
+    y = "Total Overall Wins",
+    title = "Wins vs. Program Spending")
+  
+```
+### Calculate Z-scores for expenses and wins
+
+```{r}
+# Calculate Z-scores for expenses and wins
+eada_raw <- eada_raw |>
+mutate (
+  mean_expenses = mean(`Total Expenses Men's Team and Women's Team`)
+  sd_expenses sd(`Total Expenses Men's Team and Women's Team`)
+  z_score = (total - mean_expenses / sd_expenses)
+)
+```
 
