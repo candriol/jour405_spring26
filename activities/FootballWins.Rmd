@@ -26,7 +26,7 @@ teams <- read_csv("https://raw.githubusercontent.com/dwillis/jour405_files/main/
 Next, we construct a linear model to analyze how different factors like `Yards Gained`, `Takeaways`, and `Points Scored` influence the number of wins. This model helps us quantify the relationships and assess which factors are significant predictors of success.
 
 ```{r}
-model <- lm(Wins ~ `Yards Gained` + Takeaways + `Points Scored`, data = teams)
+model <- lm(Wins ~  + Takeaways + `Points Scored`, data = teams)
 summary(model)
 ```
 
@@ -54,7 +54,7 @@ The coefficients tell us the estimated effect of each independent variable on th
 
 Is this a useful model, based on what you've seen? Why?
 
-ANSWER HERE
+I think the model is somewhat useful because it gives a solid idea about which factors are the biggest indicators of a team that wins more games. But the residuals being +4 and -4 in a 16 game sample size is certainty not ideal and makes it hard to fully tust this model. 
 
 ## Correlation Analysis
 
@@ -80,8 +80,11 @@ The results from our correlation analysis show the strength of the relationships
 
 Which of these three factors - Yards Gained, Takeaways and Points Scored - have the most impact on wins? Are there any that do not seem impactful at all?
 
-ANSWER HERE
-
+The data shows that points scored has the most impact on wins of those three factors. Yard gained is not impact at all. There was just a .44 correlation between yard gained and wins, and the team that led the league (the Cowboys) only won 8 games. 
 ## Using the Model (3 points)
 
 Without using the words "multiple regression model", describe how you could use this model to cover a team or game.
+
+I could use this model to cover a team or game to find which factor correlates to wins and losses the most for the team I'm covering. It would be different for a lot of teams. Some times are more offensive oriented and thrive when they move the ball while some teams lean on their defense and thrive in low scoring games. This would let fans of the team know the kind of game their team likely needs to play to have the best chance at winning. 
+
+
