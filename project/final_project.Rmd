@@ -20,7 +20,8 @@ library(tidyverse)
 ## Load EADA Data
 ```{r load-data}
 eada_raw <- read_csv("final_project.Rmd - Sheet1.csv")
-success <- read_csv("mbb_stats.csv")
+mbb_stats <- read_csv("mbb_stats.csv")
+wbbstats_1525 <- read_csv("wbbstats_1525")
 ```
 
 The dataset comes from the U.S. Department of Education's Equity in Athletics Disclosure Act (EADA) database and contains the expenses of all NCAA Division I FCS/FBS men's and women's basketball programs from 2014-2023. 
@@ -45,7 +46,7 @@ eada_raw |>
   geom_smooth(method = "lm", se = FALSE, color = "red") +
   labs(
     x = "Total Basketball Expenses",
-    y = "Total Overall Wins",
+    y = "OverallWins",
     title = "Wins vs. Program Spending")
   
 ```
