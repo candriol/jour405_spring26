@@ -21,7 +21,6 @@ library(tidyverse)
 ```{r load-data}
 eada_raw <- read_csv("final_project.Rmd - Sheet1.csv")
 mbb_stats <- read_csv("mbb_stats.csv")
-wbb_stats <- read_csv("wbbstats_1525.csv")
 lookup <- read_csv("school_lookup.csv")
 ```
 
