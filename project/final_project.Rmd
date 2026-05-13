@@ -1,29 +1,12 @@
 ---
-title: "Final Project: MBB Spending vs Wins"
+title: "Final Project: College Basketball Spending vs Wins"
 output: html_document
+Christian Andriolas
 ---
-Tests I could run:
-
-I think the most relevant test for my project would be a correlation test like the one's we've been doing recently. My hypothesis is a question of if two variables are correlated with each other so this makes the most sense. I think a Pearson correlation between the total expenses and wins for each year would give me the positive correlation that I'm expecting. I think also running separate tests like with operating and recruiting expenses can help see which variable has the biggest effect on winning. 
-
-Finding Z-scores would be useful for identifying outlier programs that spends either drastically more or less than the average program, or wins more or less than expected given their spending habits. Calculating z-scores for both expenses and wins while looking for extreme tails would be telling. 
-
-GGplot visualizations such as a scartterplot, histogram, line chart and bar chart would be nice visuals that supply useful information. Each visual would have its own topic. 
-
-Finding margin of error and confidence intervals are another test. Because I am making claims about the spending and wins being correlated, having the confidence about those statements would make sense. This is relevant in the subgroups and help me find if the difference in those is meaningful.
-
-The last one I can think of a t-test splitting schools into two groups and find the if the averages of something like win totals is significantly different. 
-
 ```{r setup}
 library(tidyverse)
 ```
-## Load EADA Data
-```{r load-data}
-eada_raw <- read_csv("final_project.Rmd - Sheet1.csv")
-mbb_stats <- read_csv("mbb_stats.csv")
-lookup <- read_csv("school_lookup.csv")
-```
-
+## Load Data
 ```{r}
 eada_raw <- read_csv("final_project.Rmd - Sheet1.csv", show_col_types = FALSE)
 success  <- read_csv("mbb_stats.csv", show_col_types = FALSE)
@@ -43,43 +26,127 @@ joined <- eada_raw |>
   inner_join(success,
              by = c("School", "Survey Year" = "season_end_year"))
 ```
+alternative_hypothesis <-- The more money a college basketball program spends, they're likelihood of winning games increases. 
+null_hypothesis <-- The amount of money a program spends on its basketball team does not effect how much they win. 
+
+### Find descriptive statistics
+```{r}
+# Find descriptive statistics
+joined |> 
+  summarise(
+    Mean_Expenses = mean(`Total Expenses Men's Team and Women's Team`, na.rm = TRUE),
+    Median_Expenses = median(`Total Expenses Men's Team and Women's Team`, na.rm = TRUE),
+    SD_Expenses = sd(`Total Expenses Men's Team and Women's Team`, na.rm = TRUE),
+    Mean_Wins = mean(OverallWins, na.rm = TRUE),
+    Median_Wins = median(OverallWins, na.rm = TRUE),
+    Total_Observations = n()
+  )
+
+```
+The median expenses being significantly lower than the mean tells us that the data is right skewed, and that a few outlier programs who spend exponentially more inflates the average. The standard deviation being somewhat close to the mean explains the variability. The mean number of wins shows a balance across the seasons. 
 
 
-The dataset comes from the U.S. Department of Education's Equity in Athletics Disclosure Act (EADA) database and contains the expenses of all NCAA Division I FCS/FBS men's and women's basketball programs from 2014-2023. 
-
-The columns most important for my analysis are the ones that state the expenses and total revenues of a given program.
-
-What's missing that I might want is the win-loss records of the programs, strength of schedule that they play, recruiting class rankings and facility spending. Having access to all of those numbers would give an even clearer representation about how much each program is spending in all areas to improve their basketball team. 
-
-Questions I have: 
-
-Some schools may have missing data for certain years. Should those rows be dropped or filled using surrounding years?
-
-The 2020 survey year covers the COVID-affected season where the NCAA Tournament was cancelled. Should that year be excluded from the wins analysis entirely?
-
-Because the dataset is so large, should I focus on 5 years instead of ten? Would that still be a large enough sample size? 
+### Calculate Z-scores for expenses and wins
+```{r}
+# Calculate Z-scores for expenses and wins
+eada_zscore <- eada_raw |>
+  mutate(expenses = as.numeric(`Total Expenses Men's Team and Women's Team`)) |>
+  group_by(`Survey Year`) |>
+  mutate(z_score = (expenses - mean(expenses, na.rm = TRUE)) /
+                    sd(expenses, na.rm = TRUE)) |>
+  ungroup()
+```
+I calculated the z-score to identify outlier programs that spends either drastically more or less than the average program. I found that programs like Duke, Syracuse, and Texas are extreme high end outliers. Their spending habits are several standard deviations above the mean. Programs I've never heard of like Northwest Indian College or Kootenai College, which unsurprisingly spent almost nothing in comparison to the larger programs. But most programs cluster between a z-score of -1 and 1, which is the normal range.
 
 ### Correlation test
 ```{r}
-eada_raw |>
+# Wins vs. Total Spending
+joined |>
   ggplot(aes(x = `Expenses Men's Team`, y = OverallWins)) +
-  geom_point()+
+  geom_point() +
   geom_smooth(method = "lm", se = FALSE, color = "red") +
   labs(
     x = "Total Basketball Expenses",
-    y = "OverallWins",
-    title = "Wins vs. Program Spending")
+    y = "Overall Wins",
+    title = "Wins vs. Total Spending"
+  )  
   
 ```
-### Calculate Z-scores for expenses and wins
+Because my topic is about if there is a correlation between the amount of money a college basketball program spends actually leads to more wins, I created a scatterplot. The red line slopes from left to right, indicating that higher total basketball expenses generally correlate with more wins overall. There are some teams with very low spending totals that still achieve high win totals and some high spending teams still win very few games. Money alone does not guarantee success, but plays a large role. 
 
+### Overall Wins vs. Operating Spending
 ```{r}
-# Calculate Z-scores for expenses and wins
-eada_raw <- eada_raw |>
-mutate (
-  mean_expenses = mean(`Total Expenses Men's Team and Women's Team`)
-  sd_expenses sd(`Total Expenses Men's Team and Women's Team`)
-  z_score = (total - mean_expenses / sd_expenses)
-)
+# Wins vs. Operating Spending
+joined |>
+  ggplot(aes(x = `Total Operating Expenses Men's Team and Women's Team`, y = OverallWins)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(
+    x = "`Total Operating Expenses Men's Team and Women's Team`",
+    y = "Overall Wins",
+    title = "Wins vs. Operating Spending"
+  ) 
+```
+I also wanted to test if total operating expenses for men's and women's college basketball programs had the same correlation. The scatterplot looks very similar, as the red line shows that higer operating budgets usually correlate with more wins. Most programs are clustered under $2.5 million and the largest variance for win totals occurs in this cluster. Operating spending alone doesn't predict performance, but it is more likely a team is successful when spending more. 
+
+
+### Confidence Interval
+```{r}
+# Confidence Interval
+ci_wins <- success |>
+  group_by(season_end_year) |>
+  summarise(
+    n         = n(),
+    mean_wins = mean(OverallWins, na.rm = TRUE),
+    se_wins   = sd(OverallWins, na.rm = TRUE) / sqrt(n),
+    ci_low    = mean_wins - 1.96 * se_wins,
+    ci_high   = mean_wins + 1.96 * se_wins
+  )
+
+```
+The confidence interval data tells me the baseline average under normal season conditions (2020 and 2021 were different because of COVID) for wins is between 16.0 and 17.7. But when looking at the higher spending teams, their confidence interval for wins is much higher. With the high spending interval being comfortably above the baseline and supports the hypothesis that high spending gives team an advantage.  
+
+### T-test -- do high spenders win significantly more?
+```{r}
+# T-test
+joined <- joined |>
+  mutate(spending_group = if_else(
+    `Expenses Men's Team` >= median(`Total Operating Expenses Men's Team and Women's Team`, na.rm = TRUE),
+    "High Spending",
+    "Low Spending"
+  ))
+
+# Run the t-test
+t_test_spending <- t.test(OverallWins ~ spending_group, data = joined)
+print(t_test_spending)
+```
+This t-test tells us that high spending programs on average win 5.7 more games than low spending programs. The p-value being essentially zero proves the results are significant and more spending is highly correlated with more wins. 
+### Histogram
+```{r}
+# Distribution of Program Spending
+joined |>
+  ggplot(aes(x = `Total Operating Expenses Men's Team and Women's Team`)) +
+  geom_histogram(bins = 15, fill = "blue", color = "white") +
+  labs(
+    x = "`Total Operating Expenses Men's Team and Women's Team`",
+    y = "Number of Programs",
+    title = "Distribution of Program Spending"
+  )
+
 ```
 
+This histogram shows how the small number of schools spending more bring the average higher and most schools sit below the average because of that. Most college basketball program are clustered in a similar spending zone, creating a right skew. This shows why the mean spending is much higher than median spending, but makes the schools who spend more the gap look larger than it actually is.
+
+
+### Story Pitch
+Headline: College basketball programs spending more money usually win more, data shows
+
+Story analysis: My story explores the amount of money men's and women's Division I basketball programs spend, how they allocate the spending, and if that correlates with the success/number of wins a team gets per season. I used analyzed about a decade's wroth of data from EADA financial disclosures and competitive data and reveals that programs do not operate on a level playing field. An elite group of programs are financial outliers and have a competitive advantage, leaving a massive middles class of programs behind.Now with NIL taking over college athletics, it will be interesting to see if the gap increases between higher and lower spending programs in the future, as my data only has a few years where NIL was instituted, but only in it's beginning stages. 
+
+Main Findings: The main finding was how programs who spend more money on average on their men's and women's college basketball teams usually correlates with more wins. My visualizations and descriptive statistics showed that. The correlations regarding total and operating expenses both showed a relationship between the two variables, while the t-test's p-value being so low confirmed that. 
+
+Potential Problems: The EADA dataset not covering NIL could be an issue. With how new it is in college athletics and with programs not having to specify how much they actually spend, it makes it hard to use just the numbers provided in the EADA data. NIL is a third-party source and actually creates an even larger gap in total expenses than there already is. 
+
+Reporting Plan: 
+
+I would try ton inrterview an Athletic Director or somebody involved with handling these programs finances at the z-score outlier schools who spend more like Duke, Syracuse and Texas, while doing the same at some programs who are clustered in the same area on the histogram. I would also like to talk to people who work with the sports economy of college athletics every day and ask if the data I found is trustworthy and teams try to "buy wins." I think talking to those people along with all of the data and tests provide a reader with an understanding of how much spedning money on a college basketball programs actually correlates to win totals. 
